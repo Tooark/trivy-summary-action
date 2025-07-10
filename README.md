@@ -28,7 +28,7 @@ jobs:
         run: |
           docker build -t myapp:latest .
 
-      - name: Run Trivy vulnerability scanner and save report
+      - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: 'myapp:latest'
@@ -39,7 +39,7 @@ jobs:
           severity: 'CRITICAL,HIGH,MEDIUM,LOW'
           output: 'trivy-results.json'
 
-      - name: Generate Trivy Summary and Send Teams Notification
+      - name: Generate Trivy Summary
         uses: Tooark/trivy-summary-action@v1
         id: trivy-summary-generator
         with:
