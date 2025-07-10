@@ -62,10 +62,10 @@ echo "total_count=$TOTAL_COUNT" >> $GITHUB_OUTPUT
       SEVERITY=$(echo "$vuln" | jq -r '.Severity')
       PKG_NAME=$(echo "$vuln" | jq -r '.PkgName')
       INSTALLED_VER=$(echo "$vuln" | jq -r '.InstalledVersion')
-      FIXED_VER=$(echo "$vuln" | jq -r '.FixedVersion // "N/A"') # Use N/A se não houver FixedVersion
-      STATUS=$(echo "$vuln" | jq -r '.Status // "N/A"') # Status da correção
+      FIXED_VER=$(echo "$vuln" | jq -r '.FixedVersion // "N/A"')
+      STATUS=$(echo "$vuln" | jq -r '.Status // "N/A"')
       TITLE=$(echo "$vuln" | jq -r '.Title // "N/A"')
-      DESCRIPTION=$(echo "$vuln" | jq -r '.Description // "N/A" | .[:200] + (if (. | length) > 200 then "..." else "" end)') # Limita a descrição a 200 caracteres
+      DESCRIPTION=$(echo "$vuln" | jq -r '.Description // "N/A" | .[:200] + (if (. | length) > 200 then "..." else "" end)')
 
       echo "#### $VULN_ID"
       echo "- **Severidade:** $SEVERITY"
