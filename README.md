@@ -1,5 +1,6 @@
-# trivy-summary-action
+# Action Github para resumo  trivy-summary-action
 Action feita para criar um summary do Scan de imagens Docker - Trivy
 
-# Inputs
+## Inputs
 - Nome do arquivo JSON da action Trivy
+- Imagem Docker a ser utilizada

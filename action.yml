@@ -7,6 +7,9 @@ inputs:
   docker-image:
     description: 'Nome da imagem Docker a ser analisada'
     required: true
+branding:
+  icon: 'eye'
+  color: 'gray-dark'
 runs:
   using: "composite"
   steps:
