@@ -1,15 +1,35 @@
-name: 'Trivy Summary and Teams Notification'
-description: 'Gera summary do Trivy e envia notificação para Power Automate/Teams'
+name: "Trivy Summary Action"
+description: "Gera summary do Trivy e envia notificação para Power Automate/Teams"
+branding:
+  icon: "eye"
+  color: "gray-dark"
 inputs:
   trivy-json:
-    description: 'Caminho do arquivo JSON de ouput da action Trivy'
+    description: "Caminho do arquivo JSON de ouput da action Trivy"
     required: true
   docker-image:
-    description: 'Nome da imagem Docker a ser analisada'
+    description: "Nome da imagem Docker a ser analisada"
     required: true
-branding:
-  icon: 'eye'
-  color: 'gray-dark'
+outputs:
+  critical_count:
+    description: "Number of critical vulnerabilities."
+    value: ${{ steps.count_vulns.outputs.critical_count }}
+  high_count:
+    description: "Number of high vulnerabilities."
+    value: ${{ steps.count_vulns.outputs.high_count }}
+  medium_count:
+    description: "Number of medium vulnerabilities."
+    value: ${{ steps.count_vulns.outputs.medium_count }}
+  low_count:
+    description: "Number of low vulnerabilities."
+    value: ${{ steps.count_vulns.outputs.low_count }}
+  unknown_count:
+    description: "Number of unknown vulnerabilities."
+    value: ${{ steps.count_vulns.outputs.unknown_count }}
+  total_count:
+    description: "Total number of vulnerabilities."
+    value: ${{ steps.count_vulns.outputs.total_count }}
+
 runs:
   using: "composite"
   steps:

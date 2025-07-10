@@ -23,6 +23,7 @@ else
   TOTAL_COUNT=$(jq '[.Results[]?.Vulnerabilities[]?] | length' "$TRIVY_JSON")
 fi
 
+echo "DEBUG: IMAGE_DOCKER=$IMAGE_TAG"
 echo "DEBUG: CRITICAL_COUNT=$CRITICAL_COUNT"
 echo "DEBUG: HIGH_COUNT=$HIGH_COUNT"
 echo "DEBUG: MEDIUM_COUNT=$MEDIUM_COUNT"
