@@ -13,31 +13,33 @@ inputs:
 outputs:
   critical_count:
     description: "Number of critical vulnerabilities."
-    value: ${{ steps.count_vulns.outputs.critical_count }}
+    value: ${{ steps.generate_summary.outputs.critical_count }}
   high_count:
     description: "Number of high vulnerabilities."
-    value: ${{ steps.count_vulns.outputs.high_count }}
+    value: ${{ steps.generate_summary.outputs.high_count }}
   medium_count:
     description: "Number of medium vulnerabilities."
-    value: ${{ steps.count_vulns.outputs.medium_count }}
+    value: ${{ steps.generate_summary.outputs.medium_count }}
   low_count:
     description: "Number of low vulnerabilities."
-    value: ${{ steps.count_vulns.outputs.low_count }}
+    value: ${{ steps.generate_summary.outputs.low_count }}
   unknown_count:
     description: "Number of unknown vulnerabilities."
-    value: ${{ steps.count_vulns.outputs.unknown_count }}
+    value: ${{ steps.generate_summary.outputs.unknown_count }}
   total_count:
     description: "Total number of vulnerabilities."
-    value: ${{ steps.count_vulns.outputs.total_count }}
+    value: ${{ steps.generate_summary.outputs.total_count }}
 
 runs:
   using: "composite"
   steps:
     - name: Install jq
+      id: install_jq
       shell: bash
       run: sudo apt-get update && sudo apt-get install -y jq
 
     - name: Generate Trivy Summary and Send Notification
+      id: generate_summary
       shell: bash
       run: |
         bash ${{ github.action_path }}/scripts/trivy-summary.sh "${{ inputs.trivy-json }}" "${{ inputs.docker-image }}"
